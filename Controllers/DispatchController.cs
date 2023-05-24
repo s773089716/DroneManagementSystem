@@ -17,6 +17,7 @@ namespace DroneManagementSystem.Controllers
     /// Provides stem related web methods
     /// </summary>    
     //[Route("")]
+    //[Route("api/[controller]")]
     [Route("api/[controller]")]
     [ApiController]
     public class DispatchController : ControllerBase
@@ -47,7 +48,8 @@ namespace DroneManagementSystem.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("/")]
+        //[Route("api/[controller]/GetAvailableDrones")]
+        [Route("GetAvailableDrones")]
         public async Task<ActionResult<AvailableDronesListResponse>> GetAvailableDrones()
         {            
             AvailableDronesListRequest request = new AvailableDronesListRequest {};

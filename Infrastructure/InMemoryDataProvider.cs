@@ -17,7 +17,11 @@ namespace DroneManagementSystem.Infrastructure
         /// <returns></returns>
         public IList<Drone> GetDronesData()
         {
-            return new List<Drone>();
+            return new List<Drone>() 
+            { 
+                    new Drone() { SerialNumber = "01" , State = DroneState.IDLE},
+                    new Drone() { SerialNumber = "02" , State = DroneState.IDLE}
+            };
         }
         #endregion
     }

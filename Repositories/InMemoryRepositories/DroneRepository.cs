@@ -1,10 +1,11 @@
-﻿using DroneManagementSystem.Infrastructure;
+﻿using DroneManagementSystem.Core.Repositories;
+using DroneManagementSystem.Infrastructure;
 using DroneManagementSystem.Models;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace DroneManagementSystem.Repositories.InMemoryRepositories
 {
-    public class DroneRepository
+    public class DroneRepository : IDroneRepository
     {
         #region Private Variables -----------------------------------------------------------------
         private static IList<Drone> _dronesList = null;        
