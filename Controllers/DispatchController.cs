@@ -62,7 +62,7 @@ namespace DroneManagementSystem.Controllers
         }
 
         [HttpGet]
-        [Route("/")]
+        [Route("GetDroneBatterLevel")]
         public async Task<ActionResult<DroneBatteryLevelResponse>> GetDroneBatterLevel()
         {
             string serialNumber = Request.Query[QueryStringKey.SerialNumber];
