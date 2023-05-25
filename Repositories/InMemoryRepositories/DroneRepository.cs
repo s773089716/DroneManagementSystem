@@ -140,6 +140,25 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
 
             return drone;
         }
+
+        public async Task<List<Medication>> GetMedicationItemsOfDrone(string serialNumber)
+        {
+            Drone? drone = null;
+            await Task.Run(() =>
+            {
+                drone =
+                (
+                    from w in DronesList
+                    where w.SerialNumber == serialNumber
+                    select w
+                ).FirstOrDefault();
+
+                if (drone == null)
+                    throw new Exception("Drone does not exists.");                                
+            });
+
+            return drone.Medications;
+        }
         #endregion
     }
 }
