@@ -11,7 +11,7 @@ namespace DroneManagementSystem.Models
         public List<Medication> Medications { get; set; } = new List<Medication>();
 
         [Required(ErrorMessage = "Serial number is required")]
-        public string SerialNumber { get; set; };
+        public string SerialNumber { get; set; }
         [Required(ErrorMessage = "Model is required")]
         public DroneModel Model { get; set; }
         [Range(0, 500, ErrorMessage = "Weight must be between 0g and 500g")]
