@@ -11,7 +11,7 @@ namespace DroneManagementSystem.Models
 
         public string SerialNumber { get; set;}
         public DroneModel Model { get; set; }
-        public decimal WeightLimit { get; set; }
+        public float WeightLimit { get; set; }
         public short BatteryCapacity { get; set; }
         public DroneState State { get; set; }
     }
