@@ -49,6 +49,14 @@ namespace DroneManagementSystem.Infrastructure
                     new Medication() { Name = "Medication 11", Code = "MD_0011", Weight = 60.00F, ImagePath = "image11.jpg" }
             };
         }
+
+        public IList<DispatchConfiguration> GetDispatchConfigurationData()
+        {
+            return new List<DispatchConfiguration>()
+            {
+                    new DispatchConfiguration() { MinimumWeight = 25 }
+            };
+        }
         #endregion
     }
 }

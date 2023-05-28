@@ -11,6 +11,7 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
         #region Private Variables -----------------------------------------------------------------
         private static IList<Drone> _dronesList = null;
         private static IList<Medication> _medicationsList = null;
+        private static IList<DispatchConfiguration> _dispatchConfigurationList = null;
         #endregion
 
         #region Constructors ----------------------------------------------------------------------
@@ -40,6 +41,18 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
                     _medicationsList = new InMemoryDataProvider().GetMedicationsData();
 
                 return _medicationsList;
+
+            }
+        }
+
+        private IList<DispatchConfiguration> DispatchConfigurationList
+        {
+            get
+            {
+                if (_dispatchConfigurationList == null)
+                    _dispatchConfigurationList = new InMemoryDataProvider().GetDispatchConfigurationData();
+
+                return _dispatchConfigurationList;
 
             }
         }
@@ -112,7 +125,7 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
         {
             Drone? drone = null;
             await Task.Run(() =>
-            {
+            {                
                 drone =
                 (
                     from w in DronesList
@@ -120,8 +133,20 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
                     select w
                 ).FirstOrDefault();
 
+                DispatchConfiguration? configuration = 
+                (
+                    from w in DispatchConfigurationList                    
+                    select w
+                ).FirstOrDefault();
+
                 if (drone == null)
                     throw new Exception("Drone does not exists.");
+
+                if (configuration == null)
+                    throw new Exception("Configuration does not exists.");
+                
+                if (drone.BatteryCapacity <= configuration.MinimumWeight)
+                    throw new Exception("Drone battery capasity is lower.");
 
                 List<Medication> medications = (from ml in MedicationsList
                                                 where medicationItemCodes.Contains(ml.Code)
@@ -135,7 +160,14 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
                 if (totalWeight > drone.WeightLimit)
                     throw new Exception("Drone weight limit exceeds.");
 
+                if (drone.State != DroneState.IDLE)
+                    throw new Exception("Drone state is not in idle.");
+
+                drone.State = DroneState.LOADING;
+
                 drone.Medications.AddRange(medications);
+
+                drone.State = DroneState.LOADED;
             });
 
             return drone;
