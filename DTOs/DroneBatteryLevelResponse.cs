@@ -5,7 +5,7 @@
 using DroneManagementSystem.Core.DTOs;
 namespace DroneManagementSystem.DTOs
 {
-    public class DroneBatteryLevelResponse : IResponseBase
+    public class DroneBatteryLevelResponse : ResponseBase
     {
         public short BatteryLevel { get; set; }
     }

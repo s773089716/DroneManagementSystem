@@ -3,7 +3,7 @@ using DroneManagementSystem.Models;
 
 namespace DroneManagementSystem.DTOs
 {
-    public class GetMedicationRequest : IRequestBase
+    public class GetMedicationRequest : RequestBase
     {
         public string? SerialNumber { get; set; }
     }

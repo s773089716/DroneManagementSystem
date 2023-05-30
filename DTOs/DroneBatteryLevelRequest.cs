@@ -6,7 +6,7 @@ using DroneManagementSystem.Core.DTOs;
 
 namespace DroneManagementSystem.DTOs
 {
-    public class DroneBatteryLevelRequest : IRequestBase
+    public class DroneBatteryLevelRequest : RequestBase
     {
         public string? SerialNumber { get; set; }
     }
