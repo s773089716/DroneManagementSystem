@@ -160,14 +160,21 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
                 if (totalWeight > drone.WeightLimit)
                     throw new Exception("Drone weight limit exceeds.");
 
-                if (drone.State != DroneState.IDLE)
-                    throw new Exception("Drone state is not in idle.");
+                if (drone.State == DroneState.LOADED)
+                    throw new Exception("Drone already loaded.");
 
-                drone.State = DroneState.LOADING;
+                if (drone.State != DroneState.IDLE && drone.State != DroneState.LOADING)
+                    throw new Exception("Drone state is not in idle/loading.");
+
+                if (drone.State != DroneState.LOADING)
+                    drone.State = DroneState.LOADING;
 
                 drone.Medications.AddRange(medications);
 
-                drone.State = DroneState.LOADED;
+                float smallestMedication = MedicationsList.Min(m => m.Weight);
+
+                if (smallestMedication > drone.WeightLimit - totalWeight)
+                    drone.State = DroneState.LOADED;
             });
 
             return drone;
@@ -190,6 +197,11 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             });
 
             return drone.Medications;
+        }
+
+        public Task<Drone> AddMedicationItemsToDrone(string serialNumber, IList<string> medicationItemCodes)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

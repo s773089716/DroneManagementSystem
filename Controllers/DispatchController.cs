@@ -79,6 +79,48 @@ namespace DroneManagementSystem.Controllers
             return NotFound();
         }
 
+        [HttpPost]
+        [Route("RegisterDrone")]
+        public async Task<ActionResult<RegisterDroneResponse>> RegisterDrone(RegisterDroneRequest request)
+        {            
+            RegisterDroneResponse response = await _dispatchService.RegisterDrone(request);
+
+            if (response.Drone != null)
+                return Ok(response);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("LoadMedications")]
+        public async Task<ActionResult<LoadMedicationsResponse>> LoadMedications(LoadMedicationsRequest request)
+        {
+            LoadMedicationsResponse response = await _dispatchService.AddMedicationItemsToDrone(request);
+
+            if (response.Drone != null)
+                return Ok(response);
+
+            return NotFound();
+        }
+
+        [HttpGet]        
+        [Route("GetMedications")]
+        public async Task<ActionResult<GetMedicationResponse>> GetMedications()
+        {
+            string serialNumber = Request.Query[QueryStringKey.SerialNumber];
+
+            if (String.IsNullOrEmpty(serialNumber))
+                serialNumber = String.Empty;
+
+            GetMedicationRequest request = new GetMedicationRequest { SerialNumber = serialNumber };
+            GetMedicationResponse response = await _dispatchService.GetMedicationItemsOfDrone(request);
+
+            if (response.Medications != null)
+                return Ok(response);
+
+            return NotFound();
+        }
+
         #endregion
     }
 }

@@ -31,6 +31,42 @@ namespace DroneManagementSystem.Services
                 BatteryLevel = await _droneRepository.GetBatteryLevelBySerialNumber(request.SerialNumber)
             };                  
         }
+
+        public async Task<RegisterDroneResponse> RegisterDrone(RegisterDroneRequest request)
+        {
+            if (request.Drone == null)
+                throw new Exception("Drone is empty");
+
+            return new RegisterDroneResponse()
+            {
+                Drone = await _droneRepository.AddNewDrone(request.Drone)
+            };
+        }
+
+        public async Task<LoadMedicationsResponse> AddMedicationItemsToDrone(LoadMedicationsRequest request)
+        {
+            if (String.IsNullOrEmpty(request.SerialNumber))
+                throw new Exception("Serial number is empty");
+
+            if (request.MedicationCodes == null || request.MedicationCodes.Count == 0)
+                throw new Exception("Medictaions list is empty");
+
+            return new LoadMedicationsResponse()
+            {
+                Drone = await _droneRepository.AddMedicationItemsToDrone(request.SerialNumber, request.MedicationCodes)
+            };
+        }
+
+        public async Task<GetMedicationResponse> GetMedicationItemsOfDrone(GetMedicationRequest request)
+        {
+            if (String.IsNullOrEmpty(request.SerialNumber))
+                throw new Exception("Serial number is empty");
+
+            return new GetMedicationResponse()
+            {
+                Medications = await _droneRepository.GetMedicationItemsOfDrone(request.SerialNumber)
+            };
+        }
     }
 }
 
