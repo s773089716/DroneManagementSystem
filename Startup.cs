@@ -21,6 +21,8 @@ namespace DroneManagementSystem
             //services.AddMvc().AddMvcOptions(EnableEnd);//.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc(options => options.EnableEndpointRouting = false);
             //services.AddMemoryCache();
+            services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+            //services.AddControllers().AddNewtonsoftJson();
 
             #region Dependency Resolution ---------------------------------------------------------
             services.RegisterServices(_loggerFactory);
