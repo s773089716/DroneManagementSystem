@@ -5,6 +5,6 @@ namespace DroneManagementSystem.Core.Services
 {
     public interface IStemService : IServiceBase
     {
-        Task<AvailableDronesListResponse> GetAvailableDrones(AvailableDronesListRequest request);
+        Task<DronesListResponse> GetAvailableDrones(DronesListRequest request);
     }
 }

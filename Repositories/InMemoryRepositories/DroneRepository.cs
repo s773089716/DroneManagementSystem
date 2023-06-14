@@ -81,6 +81,22 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             return Drones;
         }
 
+        public async Task<IList<Drone>> GetDronesList()
+        {
+            IList<Drone> Drones = new List<Drone>();
+
+            await Task.Run(() =>
+            {
+                Drones =
+                (
+                    from w in DronesList                    
+                    select w
+                ).ToList<Drone>();
+            });
+
+            return Drones;
+        }
+
         public async Task<short> GetBatteryLevelBySerialNumber(string SerialNumber)
         {                   
             Drone? drone = null; 

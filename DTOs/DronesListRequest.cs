@@ -2,7 +2,7 @@
 
 namespace DroneManagementSystem.DTOs
 {
-    public class AvailableDronesListRequest : RequestBase
+    public class DronesListRequest : RequestBase
     {
     }
 }

@@ -5,8 +5,10 @@ namespace DroneManagementSystem.Core.Services
 {
     public interface IDispatchService : IServiceBase
     {
-        Task<AvailableDronesListResponse> GetAvailableDrones(AvailableDronesListRequest request);
+        Task<DronesListResponse> GetAvailableDrones(DronesListRequest request);
 
+        Task<DronesListResponse> GetDronesList(DronesListRequest request);
+        
         Task<DroneBatteryLevelResponse> GetDroneBatteryLevel(DroneBatteryLevelRequest request);
 
         Task<RegisterDroneResponse> RegisterDrone(RegisterDroneRequest request);

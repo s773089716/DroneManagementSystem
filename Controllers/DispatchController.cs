@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using DroneManagementSystem.Core.Services;
 using DroneManagementSystem.DTOs;
 using DroneManagementSystem.Infrastructure;
+using DroneManagementSystem.BackgroundServices;
 #endregion
 namespace DroneManagementSystem.Controllers
 {
@@ -23,8 +24,8 @@ namespace DroneManagementSystem.Controllers
     public class DispatchController : ControllerBase
     {
         #region Private Variables -----------------------------------------------------------------
-        private IDispatchService _dispatchService = null;
-        private readonly ILogger<DispatchController> _logger;
+        private IDispatchService _dispatchService;
+        private readonly ILogger<DispatchController> _logger;        
         #endregion
 
         #region Constructors ----------------------------------------------------------------------
@@ -50,10 +51,10 @@ namespace DroneManagementSystem.Controllers
         [HttpGet]
         //[Route("api/[controller]/GetAvailableDrones")]
         [Route("GetAvailableDrones")]
-        public async Task<ActionResult<AvailableDronesListResponse>> GetAvailableDrones()
+        public async Task<ActionResult<DronesListResponse>> GetAvailableDrones()
         {            
-            AvailableDronesListRequest request = new AvailableDronesListRequest {};
-            AvailableDronesListResponse response = await _dispatchService.GetAvailableDrones(request);
+            DronesListRequest request = new DronesListRequest {};
+            DronesListResponse response = await _dispatchService.GetAvailableDrones(request);
 
             if (response.Drones != null && response.Drones.Count > 0)
                 return Ok(response);

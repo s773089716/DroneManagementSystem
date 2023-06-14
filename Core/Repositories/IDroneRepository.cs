@@ -7,6 +7,8 @@ namespace DroneManagementSystem.Core.Repositories
     {
         Task<IList<Drone>> FindDronesByStatusEnum(DroneState status);
 
+        Task<IList<Drone>> GetDronesList();
+
         Task<short> GetBatteryLevelBySerialNumber(string SerialNumber);
 
         Task<Drone> AddNewDrone(Drone drone);

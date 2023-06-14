@@ -2,6 +2,7 @@
 using DroneManagementSystem.Core.Services;
 using DroneManagementSystem.DTOs;
 using DroneManagementSystem.Infrastructure;
+using DroneManagementSystem.Models;
 using DroneManagementSystem.Repositories.InMemoryRepositories;
 
 namespace DroneManagementSystem.Services
@@ -16,9 +17,9 @@ namespace DroneManagementSystem.Services
             _droneRepository = droneRepository;
         }
 
-        public async Task<AvailableDronesListResponse> GetAvailableDrones(AvailableDronesListRequest request)
+        public async Task<DronesListResponse> GetAvailableDrones(DronesListRequest request)
         {
-            return new AvailableDronesListResponse()
+            return new DronesListResponse()
             {
                 Drones = await _droneRepository.FindDronesByStatusEnum(DroneState.IDLE)
             };
@@ -30,6 +31,14 @@ namespace DroneManagementSystem.Services
             {
                 BatteryLevel = await _droneRepository.GetBatteryLevelBySerialNumber(request.SerialNumber)
             };                  
+        }
+
+        public async Task<DronesListResponse> GetDronesList(DronesListRequest request)
+        {
+            return new DronesListResponse()
+            {
+                Drones = await _droneRepository.GetDronesList()
+            };
         }
 
         public async Task<RegisterDroneResponse> RegisterDrone(RegisterDroneRequest request)
