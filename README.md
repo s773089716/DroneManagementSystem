@@ -1,6 +1,7 @@
 Drone Management System, project features were fully completed, in minimal level.
+please use **VisualStudio 2022** or **Visual Studio Code** to open the project.
 Included:
-1. Full runnable code
+1. Fully tested runnable code
 2. Simple inmemory data
 3. Dispatch service
 4. Periodic task
