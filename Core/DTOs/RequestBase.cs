@@ -1,6 +1,8 @@
-﻿namespace DroneManagementSystem.Core.DTOs
+﻿using DroneManagementSystem.Infrastructure;
+
+namespace DroneManagementSystem.Core.DTOs
 {
     public abstract class RequestBase : IRequestBase
-    {
+    {        
     }
 }

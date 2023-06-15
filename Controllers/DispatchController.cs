@@ -44,64 +44,98 @@ namespace DroneManagementSystem.Controllers
         #endregion
 
         #region Web Methods -----------------------------------------------------------------------
-        /// <summary>
-        /// Returns the requested stem data. And returns 404 if data not found.
-        /// </summary>
-        /// <returns></returns>
+        
         [HttpGet]
         //[Route("api/[controller]/GetAvailableDrones")]
         [Route("GetAvailableDrones")]
         public async Task<ActionResult<DronesListResponse>> GetAvailableDrones()
         {            
             DronesListRequest request = new DronesListRequest {};
-            DronesListResponse response = await _dispatchService.GetAvailableDrones(request);
+            DronesListResponse response = new DronesListResponse();
 
-            if (response.Drones != null && response.Drones.Count > 0)
-                return Ok(response);
+            try
+            {
+                response = await _dispatchService.GetAvailableDrones(request);                
 
-            return NotFound();
+                if (response.Drones != null)
+                    return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.MessageType = DTOMessageType.Error;
+            }
+
+            return new BadRequestObjectResult(response);
         }
 
         [HttpGet]
         [Route("GetDroneBatterLevel")]
         public async Task<ActionResult<DroneBatteryLevelResponse>> GetDroneBatterLevel()
         {
+            DroneBatteryLevelResponse response = new DroneBatteryLevelResponse();
             string serialNumber = Request.Query[QueryStringKey.SerialNumber];
 
             if (String.IsNullOrEmpty(serialNumber))
                 serialNumber = String.Empty;
+            
+            try
+            {
+                DroneBatteryLevelRequest request = new DroneBatteryLevelRequest { SerialNumber = serialNumber };
+                response = await _dispatchService.GetDroneBatteryLevel(request);
 
-            DroneBatteryLevelRequest request = new DroneBatteryLevelRequest { SerialNumber = serialNumber };
-            DroneBatteryLevelResponse response = await _dispatchService.GetDroneBatteryLevel(request);
+                if (response.BatteryLevel > -1)
+                    return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.MessageType = DTOMessageType.Error;
+            }
 
-            if (response.BatteryLevel > -1)
-                return Ok(response);
-
-            return NotFound();
+            return new BadRequestObjectResult(response);
         }
 
         [HttpPost]
         [Route("RegisterDrone")]
         public async Task<ActionResult<RegisterDroneResponse>> RegisterDrone(RegisterDroneRequest request)
-        {            
-            RegisterDroneResponse response = await _dispatchService.RegisterDrone(request);
+        {
+            RegisterDroneResponse response = new RegisterDroneResponse();
+            try
+            {
+                response = await _dispatchService.RegisterDrone(request);
 
-            if (response.Drone != null)
-                return Ok(response);
+                if (response.Drone != null)
+                    return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.MessageType = DTOMessageType.Error;
+            }
 
-            return NotFound();
+            return new BadRequestObjectResult(response);
         }
 
         [HttpPost]
         [Route("LoadMedications")]
         public async Task<ActionResult<LoadMedicationsResponse>> LoadMedications(LoadMedicationsRequest request)
         {
-            LoadMedicationsResponse response = await _dispatchService.AddMedicationItemsToDrone(request);
+            LoadMedicationsResponse response = new LoadMedicationsResponse();
+            try
+            {
+                response = await _dispatchService.AddMedicationItemsToDrone(request);
 
-            if (response.Drone != null)
-                return Ok(response);
+                if (response.Drone != null)
+                    return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.MessageType = DTOMessageType.Error;
+            }
 
-            return NotFound();
+            return new BadRequestObjectResult(response);            
         }
 
         [HttpGet]        
@@ -113,13 +147,23 @@ namespace DroneManagementSystem.Controllers
             if (String.IsNullOrEmpty(serialNumber))
                 serialNumber = String.Empty;
 
-            GetMedicationRequest request = new GetMedicationRequest { SerialNumber = serialNumber };
-            GetMedicationResponse response = await _dispatchService.GetMedicationItemsOfDrone(request);
+            GetMedicationResponse response = new GetMedicationResponse();
+            GetMedicationRequest request = new GetMedicationRequest { SerialNumber = serialNumber };            
 
-            if (response.Medications != null)
-                return Ok(response);
+            try
+            {
+                response = await _dispatchService.GetMedicationItemsOfDrone(request);
 
-            return NotFound();
+                if (response.Medications != null)
+                    return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.MessageType = DTOMessageType.Error;
+            }
+
+            return new BadRequestObjectResult(response);
         }
 
         #endregion
