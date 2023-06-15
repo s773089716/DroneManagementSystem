@@ -1,4 +1,4 @@
-Project is partially completed.
+Project features were fully completed.
 Included:
 1. Full runnable code
 2. Simple inmemory data
@@ -11,11 +11,12 @@ Included:
 9. SOLID principles
 10. Partial model validation
 
-Below items were not included due to the lack of time.
+Below items were not included due to the lack of time and could be do as the next phase.
 1. SQL Server database
 2. Inmemory DbContext
 3. Unit testing
 
-Please use below link to download and import POSTMAN collection for testing
-[https://github.com/s773089716/DroneManagementSystem/commit/a9f2f5e82ee1233ee8b1fd7c2a5c17598153dd43](https://github.com/s773089716/DroneManagementSystem/blob/a9f2f5e82ee1233ee8b1fd7c2a5c17598153dd43/DispatchControlSystem.postman_collection.json)
+Please use below link to download and import POSTMAN collection for testing, because unit testing was not added due time didnot permit,
+https://github.com/s773089716/DroneManagementSystem/tree/master/PostmanCollection
+
 
