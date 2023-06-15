@@ -9,15 +9,32 @@ using DroneManagementSystem.Infrastructure;
 
 namespace DroneManagementSystem.Services
 {
+    /// <summary>
+    /// Dispatch service details
+    /// </summary>
     public class DispatchService : IDispatchService
     {
+        #region Private Variables -----------------------------------------------------------------
         IDroneRepository _droneRepository;
+        #endregion
 
+        #region Constructors ----------------------------------------------------------------------
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="droneRepository"></param>
         public DispatchService(IDroneRepository droneRepository)
         {
             _droneRepository = droneRepository;
         }
+        #endregion
 
+        #region Methods ---------------------------------------------------------------------------
+        /// <summary>
+        /// This method GetAvailableDrones
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<DronesListResponse> GetAvailableDrones(DronesListRequest request)
         {
             return new DronesListResponse()
@@ -26,6 +43,11 @@ namespace DroneManagementSystem.Services
             };
         }
 
+        /// <summary>
+        /// This method GetDroneBatteryLevel
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<DroneBatteryLevelResponse> GetDroneBatteryLevel(DroneBatteryLevelRequest request)
         {
             return new DroneBatteryLevelResponse()
@@ -34,6 +56,11 @@ namespace DroneManagementSystem.Services
             };                  
         }
 
+        /// <summary>
+        /// This method GetDronesList
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<DronesListResponse> GetDronesList(DronesListRequest request)
         {
             return new DronesListResponse()
@@ -42,6 +69,12 @@ namespace DroneManagementSystem.Services
             };
         }
 
+        /// <summary>
+        /// This method RegisterDrone
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<RegisterDroneResponse> RegisterDrone(RegisterDroneRequest request)
         {
             if (request.Drone == null)
@@ -53,6 +86,12 @@ namespace DroneManagementSystem.Services
             };
         }
 
+        /// <summary>
+        /// This method AddMedicationItemsToDrone
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<LoadMedicationsResponse> AddMedicationItemsToDrone(LoadMedicationsRequest request)
         {
             if (String.IsNullOrEmpty(request.SerialNumber))
@@ -67,6 +106,12 @@ namespace DroneManagementSystem.Services
             };
         }
 
+        /// <summary>
+        /// This method GetMedicationItemsOfDrone
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<GetMedicationResponse> GetMedicationItemsOfDrone(GetMedicationRequest request)
         {
             if (String.IsNullOrEmpty(request.SerialNumber))
@@ -77,6 +122,7 @@ namespace DroneManagementSystem.Services
                 Medications = await _droneRepository.GetMedicationItemsOfDrone(request.SerialNumber)
             };
         }
+        #endregion
     }
 }
 

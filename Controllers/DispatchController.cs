@@ -13,12 +13,7 @@ using DroneManagementSystem.Infrastructure;
 using DroneManagementSystem.BackgroundServices;
 #endregion
 namespace DroneManagementSystem.Controllers
-{
-    /// <summary>
-    /// Provides stem related web methods
-    /// </summary>    
-    //[Route("")]
-    //[Route("api/[controller]")]
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class DispatchController : ControllerBase
@@ -28,13 +23,7 @@ namespace DroneManagementSystem.Controllers
         private readonly ILogger<DispatchController> _logger;        
         #endregion
 
-        #region Constructors ----------------------------------------------------------------------
-        // GET: api/Stems
-        /// <summary>
-        /// Stem constructor. Injected instances will be assigned here.
-        /// </summary>
-        /// <param name="stemService">Service which is used to get data</param>
-        /// <param name="logger">Logger service to be used</param>
+        #region Constructors ----------------------------------------------------------------------        
         public DispatchController(IDispatchService dispatchService, ILogger<DispatchController> logger)
         {
             //TODO: Need to use proper logging provider and be injected through middleware
@@ -45,8 +34,7 @@ namespace DroneManagementSystem.Controllers
 
         #region Web Methods -----------------------------------------------------------------------
         
-        [HttpGet]
-        //[Route("api/[controller]/GetAvailableDrones")]
+        [HttpGet]        
         [Route("GetAvailableDrones")]
         public async Task<ActionResult<DronesListResponse>> GetAvailableDrones()
         {            

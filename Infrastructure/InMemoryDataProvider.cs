@@ -1,11 +1,10 @@
-﻿using DroneManagementSystem.Core.Infrastructure;
-using DroneManagementSystem.Models;
-using System.Net;
-
-/**************************************************************************************************
+﻿/**************************************************************************************************
  * Author   : Sampath Kumara
  * Date     : 2023-05-24
  *************************************************************************************************/
+using DroneManagementSystem.Core.Infrastructure;
+using DroneManagementSystem.Models;
+
 namespace DroneManagementSystem.Infrastructure
 {
     public class InMemoryDataProvider : IDataProvider
