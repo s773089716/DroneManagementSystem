@@ -1,8 +1,10 @@
-﻿using DroneManagementSystem.Core.Repositories;
+﻿/**************************************************************************************************
+ * Author   : Sampath Kumara
+ * Date     : 2023-05-22
+ *************************************************************************************************/
+using DroneManagementSystem.Core.Repositories;
 using DroneManagementSystem.Infrastructure;
 using DroneManagementSystem.Models;
-using Microsoft.Extensions.Caching.Memory;
-using System.Text;
 
 namespace DroneManagementSystem.Repositories.InMemoryRepositories
 {
@@ -60,10 +62,10 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
 
         #region Methods ---------------------------------------------------------------------------
         /// <summary>
-        /// Service method to search data related to the prefix
+        /// This method returns the list of drones of given status
         /// </summary>
-        /// <param name="prefix">Prefix to be searched</param>
-        /// <returns>String array</returns>
+        /// <param name="status">Given status</param>
+        /// <returns>Drones list</returns>
         public async Task<IList<Drone>> FindDronesByStatusEnum(DroneState status)
         {
             IList<Drone> Drones = new List<Drone>();
@@ -81,6 +83,10 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             return Drones;
         }
 
+        /// <summary>
+        /// This method returns the list of drones
+        /// </summary>
+        /// <returns>Drones list</returns>
         public async Task<IList<Drone>> GetDronesList()
         {
             IList<Drone> Drones = new List<Drone>();
@@ -97,7 +103,12 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             return Drones;
         }
 
-        public async Task<short> GetBatteryLevelBySerialNumber(string SerialNumber)
+        /// <summary>
+        /// This method returns the battery level of particular drone
+        /// </summary>
+        /// <param name="serialNumber"></param>
+        /// <returns></returns>
+        public async Task<short> GetBatteryLevelBySerialNumber(string serialNumber)
         {                   
             Drone? drone = null; 
             await Task.Run(() =>
@@ -105,7 +116,7 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
                 drone =
                 (
                     from w in DronesList
-                    where w.SerialNumber == SerialNumber
+                    where w.SerialNumber == serialNumber
                     select w
                 ).FirstOrDefault();
             });
@@ -116,6 +127,12 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             return drone.BatteryCapacity;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<Drone> AddNewDrone(Drone drone)
         { 
             Drone? existingDrone = null;
@@ -137,6 +154,13 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             return drone;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serialNumber"></param>
+        /// <param name="medicationItemCodes"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>             
         public async Task<Drone> AddMedicationItemsToDrone(string serialNumber, List<string> medicationItemCodes)
         {
             Drone? drone = null;
@@ -196,6 +220,12 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             return drone;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serialNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<List<Medication>> GetMedicationItemsOfDrone(string serialNumber)
         {
             Drone? drone = null;
@@ -215,10 +245,7 @@ namespace DroneManagementSystem.Repositories.InMemoryRepositories
             return drone.Medications;
         }
 
-        public Task<Drone> AddMedicationItemsToDrone(string serialNumber, IList<string> medicationItemCodes)
-        {
-            throw new NotImplementedException();
-        }
+        
         #endregion
     }
 }

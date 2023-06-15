@@ -6,6 +6,6 @@ namespace DroneManagementSystem.DTOs
     public class LoadMedicationsRequest : RequestBase
     {
         public string? SerialNumber { get; set; }
-        public IList<string> MedicationCodes { get; set; } = new List<string>();
+        public List<string> MedicationCodes { get; set; } = new List<string>();
     }
 }

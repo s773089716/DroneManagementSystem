@@ -1,13 +1,14 @@
-﻿using DroneManagementSystem.Core.Repositories;
+﻿/**************************************************************************************************
+ * Author   : Sampath Kumara
+ * Date     : 2023-05-22
+ *************************************************************************************************/
+using DroneManagementSystem.Core.Repositories;
 using DroneManagementSystem.Core.Services;
 using DroneManagementSystem.DTOs;
 using DroneManagementSystem.Infrastructure;
-using DroneManagementSystem.Models;
-using DroneManagementSystem.Repositories.InMemoryRepositories;
 
 namespace DroneManagementSystem.Services
 {
-    
     public class DispatchService : IDispatchService
     {
         IDroneRepository _droneRepository;

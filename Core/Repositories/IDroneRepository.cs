@@ -13,7 +13,7 @@ namespace DroneManagementSystem.Core.Repositories
 
         Task<Drone> AddNewDrone(Drone drone);
 
-        Task<Drone> AddMedicationItemsToDrone(string serialNumber, IList<string> medicationItemCodes);
+        Task<Drone> AddMedicationItemsToDrone(string serialNumber, List<string> medicationItemCodes);
 
         Task<List<Medication>> GetMedicationItemsOfDrone(string serialNumber);
     }
