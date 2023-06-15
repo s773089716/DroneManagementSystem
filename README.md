@@ -1,4 +1,4 @@
-Project features were fully completed.
+Drone Management System, project features were fully completed, in minimal level.
 Included:
 1. Full runnable code
 2. Simple inmemory data
