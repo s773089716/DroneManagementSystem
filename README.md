@@ -11,7 +11,7 @@ Included:
 9. SOLID principles
 10. Partial model validation
 
-Below items were not included due to the lack of time.
+Below items were not included due to the lack of time and could be do as the next phase.
 1. SQL Server database
 2. Inmemory DbContext
 3. Unit testing
