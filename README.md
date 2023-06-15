@@ -1,6 +1,6 @@
 Drone Management System, project features were fully completed, in minimal level.
 Included:
-1. Fully tested runnable code
+1. Fully tested runnable code for all features, best cases.
 2. Simple inmemory data
 3. Dispatch service
 4. Periodic task
