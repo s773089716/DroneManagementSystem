@@ -1,4 +1,4 @@
-Project is partially completed.
+Project features were fully completed.
 Included:
 1. Full runnable code
 2. Simple inmemory data
