@@ -37,7 +37,8 @@ namespace DroneManagementSystem.Controllers
         [HttpGet]        
         [Route("GetAvailableDrones")]
         public async Task<ActionResult<DronesListResponse>> GetAvailableDrones()
-        {            
+        {
+            //throw new Exception("test");
             DronesListRequest request = new DronesListRequest {};
             DronesListResponse response = new DronesListResponse();
 
@@ -51,8 +52,10 @@ namespace DroneManagementSystem.Controllers
             catch (Exception ex)
             {
                 response.Message = ex.Message;
-                response.MessageType = DTOMessageType.Error;
+                response.MessageType = DTOMessageType.Error;                
             }
+
+           
 
             return new BadRequestObjectResult(response);
         }

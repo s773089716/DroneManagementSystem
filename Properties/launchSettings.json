@@ -2,12 +2,12 @@
   "profiles": {
     "DroneManagementSystem": {
       "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "api/dispatch/GetAvailableDrones",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true,
+      },      
       "applicationUrl": "http://localhost:5010"
     },
     "IIS Express": {
